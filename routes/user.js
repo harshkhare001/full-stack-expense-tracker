@@ -8,9 +8,11 @@ router.use(express.static("public"));
 
 router.get('/signup',userController.getSignUpPage)
 
-router.post("/adduser", userController.addUser);
+router.post("/signup", userController.addUser);
 
-// router.post("/login", userController.login);
+router.get('/login',userController.getLoginPage)
+
+router.post("/login", userController.login);
 
 //router.post("/logIn", userController.logIn);
 

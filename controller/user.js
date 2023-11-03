@@ -40,14 +40,15 @@ exports.login = async (req,res,next)=>
         const user = await users.findOne({ where : { email : email}})
         if(user)
         {
-            if(user.password === password)
-            {
-                res.status(200).json({ success: true, message: "Login Successful!" });
-            }
-            else 
-            {
-                res.status(401).json({success : false, message:"Incorrect Password"});
-            }
+            bcrypt.compare(password , user.password, (err,result)=>{
+                if(!err)
+                {
+                    res.status(200).json({ success: true, message: "Login Successful!" });
+                }
+                else{
+                    res.status(401).json({success : false, message:"Incorrect Password"});
+                }
+            });
         }
         else
         {

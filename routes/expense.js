@@ -6,7 +6,7 @@ const expressController = require('../controller/expense');
 
 router.use(express.static("public"));
 
-router.get('/',expressController.getHomePage);
+router.get('/expense',expressController.getHomePage);
 
 router.get('/expenses', expressController.getExpenses);
 

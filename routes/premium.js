@@ -1,19 +1,10 @@
-const User = require('../models/user');
+const express = require('express');
 
-exports.showLead = (req, res, next)=>{
+const router = express.Router();
 
-    if(req.user.ispremiumuser)
-    {
-        User.findAll({attributes: ["name", "totalExpense"]})
-        .then((users)=>{
-            users.sort(function (a, b) {
-                return b.totalExpense - a.totalExpense;
-            });
-            res.json(users);
-        })
-    }
-    else 
-    {
-        res.json({ success: false, messege: "not a premium user" });
-    }
-}
+const expressController = require('../controller/premium');
+const userAuthenticator = require('../middleware/auth');
+
+router.get('/premium/getleaders', userAuthenticator.authenticate, expressController.showLead)
+
+module.exports = router;

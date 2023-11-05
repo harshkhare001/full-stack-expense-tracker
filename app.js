@@ -15,10 +15,12 @@ app.use(bodyParser.json());
 const expenseRoute = require('./routes/expense');
 const userRoute = require('./routes/user');
 const purchaseRoute = require('./routes/purchase');
+const premiumRoute = require('./routes/premium');
 
 app.use(expenseRoute);
 app.use(userRoute);
 app.use(purchaseRoute);
+app.use(premiumRoute);
 
 User.hasMany(Expense);
 Expense.belongsTo(User);

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Expense</title>
-    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <link rel="icon" type="image/x-icon" href="/images/logo2.png">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
@@ -13,7 +14,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC&family=Rowdies:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
   </head>
-
+  <header id="header-1">
+    <img id="header-img" src="/images/logo2.png">
+    <button id="lead-button" style="visibility: hidden;">Leaderboard</button>
+    <button id="logout">Logout</button>
+    <button id="rzp-button-1">Buy Premium ♛</button>
+    <div id="premium-message"></div>
+  </header>
   <body>
     <div class=".container" id="container">
       <form id="form">
@@ -35,20 +42,26 @@
         </select>
         <br /><br />
         <input type="submit" class="btn btn-danger" value="Add Expense" />
-
         <br /><br />
-        
       </form>
-      <button id="rzp-button-1">Buy Premium</button>
-      
     </div>
     <div class="History" id="history">
         <h2>EXPENSE HISTORY</h2>
         <hr>
       <ol class="title" id="list"></ol>
     </div>
+    <div class="leaderboard" id="leaderboard" style="visibility: hidden;">
+      <h2>Leaderboard</h2>
+      <hr>
+    <!-- <ol class="title" id="list1"></ol> -->
+    <table id="leader-table">
+      <tr>
+        <th>Name</th>
+        <th>Total Expense</th>
+      </tr>
+    </table>
+  </div>
     <script src="js/main.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <!-- <script src="/expanse_tracker/razorpay.js"></script> -->
   </body>
 </html>

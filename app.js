@@ -16,11 +16,13 @@ const expenseRoute = require('./routes/expense');
 const userRoute = require('./routes/user');
 const purchaseRoute = require('./routes/purchase');
 const premiumRoute = require('./routes/premium');
+const forgotpasswordRoute = require('./routes/forgotpassword');
 
 app.use(expenseRoute);
 app.use(userRoute);
 app.use(purchaseRoute);
 app.use(premiumRoute);
+app.use(forgotpasswordRoute);
 
 User.hasMany(Expense);
 Expense.belongsTo(User);

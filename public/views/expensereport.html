@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Expense</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo2.png">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous' defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC&family=Rowdies:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <script>
+    function expense()
+    {
+        window.location.href = "expense";
+    }
+  </script>
+  <header id="header-1">
+    <img id="header-img" src="/images/logo2.png">
+    Expense Report
+    <button id="download-file" >Download as file</button>
+    <button id="back-button" onclick= expense() style="float: right;" >Back</button>
+  </header>
+  <body>
+    <div class=".container" id="container1">
+      <h2>Monthly Report</h2>
+      <hr>
+      <table id="monthly-table">
+        <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Categoery</th>
+            <th>Expense</th>
+        </tr>
+      </table>
+  </div>
+    <script src="js/expensereport.js"></script>
+  </body>
+</html>

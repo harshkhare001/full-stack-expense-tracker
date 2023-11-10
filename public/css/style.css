@@ -25,6 +25,18 @@ h1 {
     border-radius: 5px;
     background-color: rgba(249, 170, 137, 0.8);
   }
+
+  #container1{
+    font-family: 'Playfair Display SC', serif;
+    font-family: 'Rowdies', sans-serif;
+    padding: 10px;
+    margin: 2% 25%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    border: 2px solid #3a3131;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: rgba(249, 170, 137, 0.8);
+  }
   
   #history {
     padding: 10px;
@@ -50,14 +62,9 @@ h1 {
     text-align: left;
     padding: 5px;
   }
-  
-  /* li:first-child {
-    margin-right: 10px;
-  } */
-
+ 
 .delete{
   margin-right: 2px;
-  /* float: inline-end; */
   float: right;
   height: 100%;
   font-size: 15px;
@@ -68,12 +75,9 @@ h1 {
 }
 .edit{
   margin-right: 2px;
-  /* float: inline-end; */
   float: right;
   height: 100%;
   font-size: 15px;
-  /* background-color: #3a3131;
-  color: aliceblue; */
   text-align: center;
   justify-content: center;
 }
@@ -135,7 +139,7 @@ select{
 
 #premium-message{
   display: block;
-  font-size: large;
+  font-size: 30px;
 }
 
 #lead-button{
@@ -147,12 +151,52 @@ select{
   padding: 5px;
 }
 
+#show-report
+{
+  background-color: #f84949;
+  border: none;
+  border-radius: 5px;
+  color: azure;
+  margin-left: 30px;
+  padding: 5px;
+}
+
+#back-button{
+  background-color: #f84949;
+  border: none;
+  border-radius: 5px;
+  color: azure;
+  margin-left: 30px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+#download-file{
+  background-color: #f84949;
+  border: none;
+  border-radius: 5px;
+  color: azure;
+  margin-left: 30px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+#download-pdf{
+  background-color: #f84949;
+  border: none;
+  border-radius: 5px;
+  color: azure;
+  margin-left: 30px;
+  margin-top: 10px;
+  padding: 5px;
+}
+
 #list1{
   justify-content: space-evenly;
 }
 
 .items span{
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 5px;
 }
 
@@ -162,4 +206,45 @@ select{
   margin: 5px;
   padding: 5px;
   justify-content: space-evenly;
+}
+
+#monthly-table{
+  width: fit-content;
+}
+
+
+#total2, #total1{
+  float: right;
+}
+
+#buttons-paganating{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttons-paganating button{
+  background-color: #f84949;
+  color: aliceblue;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  width: max-content;
+  border-radius: 5px;
+}
+
+#lines{
+  width:fit-content;
+  margin-top: 5px;
+  top: 0;
+}
+
+#linesToShow{
+  background-color: #f84949;
+  color: aliceblue;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  width: max-content;
+  border-radius: 5px;
 }

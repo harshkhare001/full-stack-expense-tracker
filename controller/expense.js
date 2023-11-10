@@ -8,13 +8,31 @@ exports.getHomePage = (req,res,next)=>
     res.sendFile(path.join(__dirname, "../", "public", "views", "index.html"))
 }
 
-exports.getExpenses = (req,res,next)=>
+exports.getExpenses = async (req,res,next)=>
 {
-    Expense.findAll({ where: { userId: req.user.id } })
-    .then((expenses)=>{
-        res.json(expenses);
-    })
-    .catch((err)=>console.log((err)));
+    try
+    {
+        const page = +req.query.page || 1;
+        const limit = 3;
+        console.log(page);
+        const startIndex = (page-1)*limit;
+        //const endIndex = (page*limit);
+        const totalExpenses = await Expense.count({ where: { userId: req.user.id }});
+        const expenses = await Expense.findAll({ where: { userId: req.user.id }, offset : startIndex, limit : limit })
+        res.json({
+            expense : expenses,
+            currentPage : page,
+            hasNextPage : limit * page < totalExpenses,
+            nextPage : page + +1,
+            hasPreviousPage : page > 1,
+            previousPage : page-1,
+            lastPage : Math.ceil(totalExpenses/limit)
+        });
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
 }
 
 exports.addExpense = async (req, res, next)=>

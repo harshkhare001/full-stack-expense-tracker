@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Expense</title>
     <link rel="icon" type="image/x-icon" href="/images/logo2.png">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous' defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
@@ -17,6 +17,7 @@
   <header id="header-1">
     <img id="header-img" src="/images/logo2.png">
     <button id="lead-button" style="visibility: hidden;">Leaderboard</button>
+    <button id="show-report" style="visibility: hidden;">Show Report</button>
     <button id="logout">Logout</button>
     <button id="rzp-button-1">Buy Premium ♛</button>
     <div id="premium-message"></div>
@@ -48,7 +49,9 @@
     <div class="History" id="history">
         <h2>EXPENSE HISTORY</h2>
         <hr>
-      <ol class="title" id="list"></ol>
+      <ul class="title" id="list"></ul>
+      <hr>
+      <div id="buttons-paganating"></div>
     </div>
     <div class="leaderboard" id="leaderboard" style="visibility: hidden;">
       <h2>Leaderboard</h2>

@@ -13,10 +13,9 @@ exports.getExpenses = async (req,res,next)=>
     try
     {
         const page = +req.query.page || 1;
-        const limit = 3;
-        console.log(page);
+        const limit = +req.query.limit    || 3;
+        //console.log(page);
         const startIndex = (page-1)*limit;
-        //const endIndex = (page*limit);
         const totalExpenses = await Expense.count({ where: { userId: req.user.id }});
         const expenses = await Expense.findAll({ where: { userId: req.user.id }, offset : startIndex, limit : limit })
         res.json({

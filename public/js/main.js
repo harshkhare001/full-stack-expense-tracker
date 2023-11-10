@@ -1,6 +1,7 @@
 var form = document.getElementById("form");
 var list = document.getElementById("list");
 var list1 = document.getElementById("list1");
+const paganation = document.getElementById('buttons-paganating');
 
 //adding expense for a pirticular user
 form.addEventListener('submit', addItem);
@@ -19,7 +20,7 @@ async function addItem(e){
       amount: amount,
       expense: category
     }
-    await axios.post("http://localhost:3000/addExpense",expense,{headers: {Authorization : token}});
+    await axios.post("http://localhost:3000/addExpense",expense,{ headers: {Authorization : token}});
     window.location.reload();
   }
   catch(err)
@@ -36,40 +37,82 @@ async function renderList() {
   try {
     const token = localStorage.getItem("token");
     const decoded = parseJwt(token);
-    console.log(decoded);
+    const page = 1;
+    //console.log(decoded);
     if(decoded.ispremiumuser){
       showPremiumUserMessage();
     }
-    const expenses = await axios.get("http://localhost:3000/expenses",{ headers: { Authorization: token }});
-    expenses.data.forEach((expense) => {
-
-      var li = document.createElement("li");
-      var deleteBtn = document.createElement("button");
-      var editBtn = document.createElement("button");
-
-      li.className = "items";
-      deleteBtn.className = "delete btn btn-dark";
-      editBtn.className = "edit btn btn-info"
-      editBtn.id = expense.id;
-      deleteBtn.id = expense.id;
-      deleteBtn.appendChild(document.createTextNode("Delete Expense"));
-      editBtn.appendChild(document.createTextNode("Edit"));
-      let span1 = document.createElement("span");
-      span1.textContent = `${expense.name}  `;
-      let span2 = document.createElement("span");
-      span2.textContent = `${expense.amount}  `;
-      let span3 = document.createElement("span");
-      span3.textContent = `${expense.expense} `;
-      li.appendChild(span1);
-      li.appendChild(span2);
-      li.appendChild(span3);
-      li.appendChild(deleteBtn);
-      //li.appendChild(editBtn);
-      list.appendChild(li);
-    });
+    const res = await axios.get(`http://localhost:3000/expenses?page=${page}`,{ headers: { Authorization: token }});
+    printList(res.data.expense);
+    showPagation(res.data);
+    
   } catch (e) {
     console.log(e);
   }
+}
+
+function printList(expenses)
+{
+  list.innerHTML =``;
+  expenses.forEach((expense) => {
+
+    var li = document.createElement("li");
+    var deleteBtn = document.createElement("button");
+    var editBtn = document.createElement("button");
+
+    li.className = "items";
+    deleteBtn.className = "delete btn btn-dark";
+    editBtn.className = "edit btn btn-info"
+    editBtn.id = expense.id;
+    deleteBtn.id = expense.id;
+    deleteBtn.appendChild(document.createTextNode("Delete"));
+    editBtn.appendChild(document.createTextNode("Edit"));
+    let span1 = document.createElement("span");
+    span1.textContent = `${expense.name}  `;
+    let span2 = document.createElement("span");
+    span2.textContent = `${expense.amount}  `;
+    let span3 = document.createElement("span");
+    span3.textContent = `${expense.expense} `;
+    li.appendChild(span1);
+    li.appendChild(span2);
+    li.appendChild(span3);
+    li.appendChild(deleteBtn);
+    //li.appendChild(editBtn);
+    list.appendChild(li);
+  });
+}
+
+function showPagation({currentPage, hasNextPage, nextPage, hasPreviousPage, previousPage, lastPage})
+{
+  if(hasPreviousPage)
+  {
+    const btn2 = document.createElement('button');
+    btn2.innerHTML = `${previousPage}`
+    btn2.addEventListener('click', ()=>getExpenses(previousPage));
+    paganation.appendChild(btn2)
+  }
+
+  const btn1 = document.createElement('button');
+  btn1.innerHTML =`${currentPage}`
+  btn1.addEventListener('click', ()=>getExpenses(currentPage));
+  paganation.appendChild(btn1);
+
+  if(hasNextPage)
+  {
+    const btn3 = document.createElement('button');
+    btn3.innerHTML = `${nextPage}`
+    btn3.addEventListener('click', ()=>getExpenses(nextPage));
+    paganation.appendChild(btn3)
+  }
+}
+
+async function getExpenses(page)
+{
+  paganation.innerHTML =``;
+  const token = localStorage.getItem("token");
+  const res = await axios.get(`http://localhost:3000/expenses?page=${page}`,{ headers: { Authorization: token }});
+  printList(res.data.expense);
+  showPagation(res.data);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -77,21 +120,23 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 //decode the jwt token to check for premium user
-function parseJwt (token) {
+function parseJwt (token)
+{
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
   }).join(''));
-
   return JSON.parse(jsonPayload);
 }
 
 //check if user is premium or not
 
-function showPremiumUserMessage(){
+function showPremiumUserMessage()
+{
   document.getElementById('rzp-button-1').style.visibility = "hidden";
-  document.getElementById('premium-message').innerHTML = "Premium User ♛"
+  document.getElementById('show-report').style.visibility = "visible";
+  document.getElementById('premium-message').innerHTML = "Premium User ♛";
   document.getElementById('lead-button').style.visibility = "visible";
 }
 
@@ -134,6 +179,7 @@ document.getElementById('rzp-button-1').onclick = async function (e)
       document.getElementById('rzp-button-1').style.visibility = "hidden";
       document.getElementById('premium-message').innerHTML = "Premium User ♛";
       document.getElementById('lead-button').style.visibility = "visible";
+      document.getElementById('show-report').style.visibility = "visible";
       localStorage.setItem('token', res.data.token);
     }
   }
@@ -161,14 +207,21 @@ document.getElementById('logout').onclick = function(e){
 document.getElementById('lead-button').onclick = async function(e)
 {
   document.getElementById('leaderboard').style.visibility = "visible";
-  let table = document.getElementById('leader-table')
+  let table = document.getElementById('leader-table');
   const token = localStorage.getItem('token');
-  const response = await axios.get("http://localhost:3000/premium/getleaders",{ headers: { Authorization: token }});
+  const response = await axios.get("http://localhost:3000/premium/getleaders",{ headers : { Authorization : token }});
   console.log(response);
-  response.data.forEach((lead)=>{
+  response.data.forEach((lead)=>
+  {
     var tr = document.createElement("tr");
     tr.innerHTML = `<td>${lead.name}</td>
                     <td>${lead.totalExpense}</td>`;
     table.appendChild(tr);
   })
 }
+
+//navigate to expense report page
+
+document.getElementById('show-report').addEventListener('click',()=>{
+  window.location.href = "expensereport";
+})

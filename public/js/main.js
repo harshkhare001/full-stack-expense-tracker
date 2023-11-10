@@ -3,6 +3,9 @@ var list = document.getElementById("list");
 var list1 = document.getElementById("list1");
 const paganation = document.getElementById('buttons-paganating');
 
+const limit = 3;
+localStorage.setItem("limit",limit);
+
 //adding expense for a pirticular user
 form.addEventListener('submit', addItem);
 
@@ -38,11 +41,12 @@ async function renderList() {
     const token = localStorage.getItem("token");
     const decoded = parseJwt(token);
     const page = 1;
+    const limit = localStorage.getItem("limit");
     //console.log(decoded);
     if(decoded.ispremiumuser){
       showPremiumUserMessage();
     }
-    const res = await axios.get(`http://localhost:3000/expenses?page=${page}`,{ headers: { Authorization: token }});
+    const res = await axios.get(`http://localhost:3000/expenses?page=${page}&limit=${limit}`,{ headers: { Authorization: token }});
     printList(res.data.expense);
     showPagation(res.data);
     
@@ -84,36 +88,47 @@ function printList(expenses)
 
 function showPagation({currentPage, hasNextPage, nextPage, hasPreviousPage, previousPage, lastPage})
 {
+  paganation.innerHTML =``;
+  const limit = localStorage.getItem("limit");
   if(hasPreviousPage)
   {
     const btn2 = document.createElement('button');
     btn2.innerHTML = `${previousPage}`
-    btn2.addEventListener('click', ()=>getExpenses(previousPage));
+    btn2.addEventListener('click', ()=>getExpenses(previousPage, limit));
     paganation.appendChild(btn2)
   }
 
   const btn1 = document.createElement('button');
   btn1.innerHTML =`${currentPage}`
-  btn1.addEventListener('click', ()=>getExpenses(currentPage));
+  btn1.addEventListener('click', ()=>getExpenses(currentPage, limit));
   paganation.appendChild(btn1);
 
   if(hasNextPage)
   {
     const btn3 = document.createElement('button');
     btn3.innerHTML = `${nextPage}`
-    btn3.addEventListener('click', ()=>getExpenses(nextPage));
+    btn3.addEventListener('click', ()=>getExpenses(nextPage, limit));
     paganation.appendChild(btn3)
   }
 }
 
-async function getExpenses(page)
+async function getExpenses(page, limit)
 {
   paganation.innerHTML =``;
   const token = localStorage.getItem("token");
-  const res = await axios.get(`http://localhost:3000/expenses?page=${page}`,{ headers: { Authorization: token }});
+  const res = await axios.get(`http://localhost:3000/expenses?page=${page}&limit=${limit}`,{ headers: { Authorization: token }});
   printList(res.data.expense);
   showPagation(res.data);
 }
+
+const linesButton = document.getElementById('linesToShow');
+
+linesButton.addEventListener('click',(e)=>{
+  const lines = document.getElementById('lines').value;
+  console.log(lines);
+  localStorage.setItem("limit",lines);
+  renderList();
+})
 
 window.addEventListener("DOMContentLoaded", () => {
   renderList();
@@ -211,6 +226,7 @@ document.getElementById('lead-button').onclick = async function(e)
   const token = localStorage.getItem('token');
   const response = await axios.get("http://localhost:3000/premium/getleaders",{ headers : { Authorization : token }});
   console.log(response);
+  table.innerHTML=``;
   response.data.forEach((lead)=>
   {
     var tr = document.createElement("tr");

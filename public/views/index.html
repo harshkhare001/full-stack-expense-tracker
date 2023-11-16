@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Expense</title>
     <link rel="icon" type="image/x-icon" href="/images/logo2.png">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous' defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
@@ -40,6 +39,9 @@
           <option value="Fuel">Fuel</option>
           <option value="Clothes">Clothes</option>
           <option value="food">food</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Grocery">Grocery</option>
+          <option value="Shopping">Shopping</option>
         </select>
         <br /><br />
         <input type="submit" class="btn btn-danger" value="Add Expense" />
@@ -67,14 +69,18 @@
     <div class="leaderboard" id="leaderboard" style="visibility: hidden;">
       <h2>Leaderboard</h2>
       <hr>
-    <!-- <ol class="title" id="list1"></ol> -->
-    <table id="leader-table">
-      <tr>
-        <th>Name</th>
-        <th>Total Expense</th>
-      </tr>
-    </table>
-  </div>
+      <table id="leader-table" >
+        <thead id="leader-table-head" class="thead-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Expense</th>
+          </tr>
+        </thead>
+        <tbody id="leader-table-body">
+
+        </tbody>
+      </table>
+    </div>
     <script src="js/main.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </body>

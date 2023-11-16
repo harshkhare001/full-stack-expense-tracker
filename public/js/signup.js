@@ -4,7 +4,8 @@ var name = document.querySelector('#name');
 var email = document.querySelector('#email');
 var password = document.querySelector('#password');
 
-var errcontainer = document.getElementById('err')
+var errContainer = document.getElementById('err');
+var msgContainer = document.getElementById('msg')
 
 form.addEventListener('submit', signup);
 
@@ -17,14 +18,29 @@ async function signup(e){
     };
     try {
             let res;
-            res = await axios.post("http://localhost:3000/adduser", user);
+            res = await axios.post("http://localhost:3000/signup", user)
             console.log(res);
-        } 
-        catch (e) {
+            
             const  p = document.createElement('p');
-            p.appendChild(document.createTextNode('User already exists'));
-            errcontainer.appendChild(p);
+            if(res.status===201)
+            {
+                p.appendChild(document.createTextNode(`${res.data.message}`));
+                msgContainer.appendChild(p);
+                msgContainer.style.color = 'green';
+            }
+            else
+            {
+                p.appendChild(document.createTextNode(`${res.data.message}`));
+                msgContainer.appendChild(p);
+                msgContainer.style.color = 'red';
+            }
+            
+            document.querySelector('#name').value = '';
+            document.querySelector('#email').value = '';
+            document.querySelector('#password').value = '';
+        } 
+        catch (e)
+        {
             console.log(e);
-
-      }
+        }
 }

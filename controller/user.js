@@ -1,6 +1,14 @@
 const path = require('path');
 const users = require('../models/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+//require('dotenv').config();
+
+function generateAccessToken(id, email,ispremiumuser)
+{
+    return jwt.sign({ userId: id, email: email, ispremiumuser }, process.env.SECRET_KEY);
+}
+
 
 exports.getSignUpPage = (req,res,next)=>
 {
@@ -17,13 +25,21 @@ exports.addUser = async(req,res,next)=>
     try
     {
         const {name, email, password } = req.body;
-
-        bcrypt.hash(password, 10, async(err,hash)=>
+        console.log(req.body);
+        const user = await users.findOne({where : {email : email}});
+        if(user)
         {
-            console.log(err);
-            await users.create({name, email, password:hash});
-            res.status(201).json({message: "User added successfully"});
-        })
+            return res.status(202).json({message : "User already exist"});
+        }
+        else
+        {
+            bcrypt.hash(password, 10, async(err,hash)=>
+            {
+                console.log(err);
+                await users.create({name, email, password:hash});
+                res.status(201).json({message: "User added successfully"});
+            })
+        }
     }
     catch(e)
     {
@@ -40,12 +56,19 @@ exports.login = async (req,res,next)=>
         const user = await users.findOne({ where : { email : email}})
         if(user)
         {
-            bcrypt.compare(password , user.password, (err,result)=>{
-                if(!err)
+            bcrypt.compare(password , user.password, (err,result)=>
+            {
+                if(err)
                 {
-                    res.status(200).json({ success: true, message: "Login Successful!" });
+                    throw new Error('Somthing went Wrong');
                 }
-                else{
+
+                if(result===true)
+                {
+                    res.status(200).json({ success: true, message: "Login Successful!", token: generateAccessToken(user.id,user.email,user.ispremiumuser) });
+                }
+                else
+                {
                     res.status(401).json({success : false, message:"Incorrect Password"});
                 }
             });

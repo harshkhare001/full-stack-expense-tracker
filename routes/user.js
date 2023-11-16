@@ -14,6 +14,4 @@ router.get('/login',userController.getLoginPage)
 
 router.post("/login", userController.login);
 
-//router.post("/logIn", userController.logIn);
-
 module.exports = router;

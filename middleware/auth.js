@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 
 const Users = require('../models/user');
 
-const authenticate = (req, res, next)=>
+exports.authenticate = (req, res, next)=>
 {
     try
     {
-        const token = req.headers("Authorization");
+        const token = req.header("Authorization");
         const user = jwt.verify(token, "kjhsgdfiuiew889kbasgdfskjabsdfjlabsbdljhsd");
         Users.findByPk(user.userId).then((user)=>{
             req.user = user;
@@ -20,4 +20,3 @@ const authenticate = (req, res, next)=>
     }
 }
 
-module.exports = authenticate;

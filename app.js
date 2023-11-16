@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
@@ -29,6 +30,7 @@ const reportRoutes = require('./routes/report');
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags : 'a'})
 
+app.use(cors());
 app.use(expenseRoute);
 app.use(userRoute);
 app.use(purchaseRoute);

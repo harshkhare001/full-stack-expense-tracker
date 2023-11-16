@@ -13,6 +13,6 @@ router.get('/expenses', userAuthenticator.authenticate, expressController.getExp
 
 router.post('/addExpense', userAuthenticator.authenticate, expressController.addExpense);
 
-router.get('/deleteExpense/:id',expressController.deleteExpense);
+router.get('/deleteExpense/:id', expressController.deleteExpense);
 
 module.exports = router;

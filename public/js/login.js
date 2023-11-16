@@ -17,14 +17,19 @@ async function login(e){
         if(res.data.message === 'Login Successful!')
         {
             alert(res.data.message);
+            localStorage.setItem("token", res.data.token)
             window.location.href = "expense";
-        }
-        else if(res.data.message === 'Incorrect Password')
-        {
-            alert('Incorrect password')
         }
     }
     catch(e){
-        console.log(e);
+        console.log(e.message);
+        if(e.message === 'Request failed with status code 401')
+        {
+            alert('Incorrect Password')
+        }
+        else{
+            alert('User does not exist');
+        }
+
     }
 }

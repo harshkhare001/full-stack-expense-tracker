@@ -3,9 +3,6 @@ var list = document.getElementById("list");
 var list1 = document.getElementById("list1");
 const paganation = document.getElementById('buttons-paganating');
 
-const limit = 3;
-localStorage.setItem("limit",limit);
-
 //adding expense for a pirticular user
 form.addEventListener('submit', addItem);
 
@@ -213,6 +210,7 @@ document.getElementById('rzp-button-1').onclick = async function (e)
 document.getElementById('logout').onclick = function(e){
   e.preventDefault;
   localStorage.removeItem('token');
+  localStorage.removeItem('limit');
   //window.location.reload();
   window.location.href= "login";
 }
@@ -222,16 +220,16 @@ document.getElementById('logout').onclick = function(e){
 document.getElementById('lead-button').onclick = async function(e)
 {
   document.getElementById('leaderboard').style.visibility = "visible";
-  let table = document.getElementById('leader-table');
+  let table = document.getElementById('leader-table-body');
+  table.innerHTML=``;
   const token = localStorage.getItem('token');
   const response = await axios.get("http://localhost:3000/premium/getleaders",{ headers : { Authorization : token }});
   console.log(response);
-  table.innerHTML=``;
+  
   response.data.forEach((lead)=>
   {
     var tr = document.createElement("tr");
-    tr.innerHTML = `<td>${lead.name}</td>
-                    <td>${lead.totalExpense}</td>`;
+    tr.innerHTML = `<td>${lead.name}</td><td>₹${lead.totalExpense}</td>`;
     table.appendChild(tr);
   })
 }

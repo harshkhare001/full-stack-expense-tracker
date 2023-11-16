@@ -12,7 +12,7 @@ async function login(e){
         password : e.target.password.value
     };
     try{
-        const res = await axios.post("http://localhost:3000/login", users);
+        const res = await axios.post("http://65.0.87.252:3000/login", users);
         console.log(res.data.message);
         if(res.data.message === 'Login Successful!')
         {

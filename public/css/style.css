@@ -181,16 +181,6 @@ select{
   padding: 5px;
 }
 
-#download-pdf{
-  background-color: #f84949;
-  border: none;
-  border-radius: 5px;
-  color: azure;
-  margin-left: 30px;
-  margin-top: 10px;
-  padding: 5px;
-}
-
 #list1{
   justify-content: space-evenly;
 }
@@ -200,7 +190,7 @@ select{
   padding: 5px;
 }
 
-#leader-table, th,td,tr{
+#leader-table th,td{
   width: 100%;
   border: 1px solid black;
   margin: 5px;
@@ -233,6 +223,10 @@ select{
   border-radius: 5px;
 }
 
+#buttons-paganating button:hover{
+  background-color: #f62a2a;
+}
+
 #lines{
   width:fit-content;
   margin-top: 5px;
@@ -247,4 +241,8 @@ select{
   border: none;
   width: max-content;
   border-radius: 5px;
+}
+
+#linesToShow:hover{
+  background-color: #f62a2a;
 }

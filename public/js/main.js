@@ -20,7 +20,7 @@ async function addItem(e){
       amount: amount,
       expense: category
     }
-    await axios.post("http://43.205.102.27:3000/addExpense",expense,{ headers: {Authorization : token}});
+    await axios.post("http://3.110.158.191:3000/addExpense",expense,{ headers: {Authorization : token}});
     window.location.reload();
   }
   catch(err)
@@ -43,7 +43,7 @@ async function renderList() {
     if(decoded.ispremiumuser){
       showPremiumUserMessage();
     }
-    const res = await axios.get(`http://43.205.102.27:3000/expenses?page=${page}&limit=${limit}`,{ headers: { Authorization: token }});
+    const res = await axios.get(`http://3.110.158.191:3000/expenses?page=${page}&limit=${limit}`,{ headers: { Authorization: token }});
     printList(res.data.expense);
     showPagation(res.data);
     
@@ -113,7 +113,7 @@ async function getExpenses(page, limit)
 {
   paganation.innerHTML =``;
   const token = localStorage.getItem("token");
-  const res = await axios.get(`http://43.205.102.27:3000/expenses?page=${page}&limit=${limit}`,{ headers: { Authorization: token }});
+  const res = await axios.get(`http://3.110.158.191:3000/expenses?page=${page}&limit=${limit}`,{ headers: { Authorization: token }});
   printList(res.data.expense);
   showPagation(res.data);
 }
@@ -159,7 +159,7 @@ list.addEventListener("click", async function del(e){
   if (e.target.classList.contains("delete")) {
     var li = e.target.parentElement;
     let id = e.target.id;
-    await axios.get(`http://43.205.102.27:3000/deleteExpense/${id}`);
+    await axios.get(`http://3.110.158.191:3000/deleteExpense/${id}`);
     list.removeChild(li);
   }
   else if(e.target.classList.contains("edit")){
@@ -171,14 +171,14 @@ list.addEventListener("click", async function del(e){
 document.getElementById('rzp-button-1').onclick = async function (e)
 {
   const token = localStorage.getItem('token');
-  const response = await axios.get('http://43.205.102.27:3000/prememiumuser',{headers: {Authorization:token}});
+  const response = await axios.get('http://3.110.158.191:3000/prememiumuser',{headers: {Authorization:token}});
   console.log(response);
   var options = 
   {
     key: response.data.key_id,
     order_id: response.data.order.id, 
     handler: async function (response){
-      const res = await axios.post('http://43.205.102.27:3000/updatetransaction',
+      const res = await axios.post('http://3.110.158.191:3000/updatetransaction',
         {
           order_id : options.order_id,
           payment_id : response.razorpay_payment_id,
@@ -223,7 +223,7 @@ document.getElementById('lead-button').onclick = async function(e)
   let table = document.getElementById('leader-table-body');
   table.innerHTML=``;
   const token = localStorage.getItem('token');
-  const response = await axios.get("http://43.205.102.27:3000/premium/getleaders",{ headers : { Authorization : token }});
+  const response = await axios.get("http://3.110.158.191:3000/premium/getleaders",{ headers : { Authorization : token }});
   console.log(response);
   
   response.data.forEach((lead)=>

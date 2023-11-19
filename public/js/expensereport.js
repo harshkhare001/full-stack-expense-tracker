@@ -12,7 +12,7 @@ window.addEventListener("DOMContentLoaded", () => {
 async function renderList()
 {
     const token = localStorage.getItem("token");
-    const response = await axios.get("http://43.205.102.27:3000/getexpenses",{ headers: { Authorization: token }});
+    const response = await axios.get("http://3.110.158.191:3000/getexpenses",{ headers: { Authorization: token }});
     //console.log(response);
     if(response.status === 202)
     {
@@ -80,7 +80,7 @@ const download = document.getElementById('download-file');
 download.addEventListener('click', async (e)=>{
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const response = await axios.get("http://43.205.102.27:3000/download",{headers : { Authorization: token }})
+    const response = await axios.get("http://3.110.158.191:3000/download",{headers : { Authorization: token }})
     if(response.status === 200)
     {
         var a = document.createElement('a');

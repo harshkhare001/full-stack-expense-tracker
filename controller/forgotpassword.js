@@ -38,7 +38,7 @@ exports.sendEmail = async (req, res, next)=>
    
    const sender = 
    {
-    email : 'harshkhare2020@gmail.com',
+    email : 'harshd.18.beis@acharya.ac.in',
     name : 'My-Expense'
    }
    const receivers = 

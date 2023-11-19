@@ -3,6 +3,7 @@ const Expense = require('../models/expense');
 const downloadedFiles = require('../models/downloadedfiles');
 const S3Services = require('../services/s3services');
 const Users = require('../models/user')
+require('dotenv').config();
 
 exports.getReportPage = async (req,res,next)=>
 {

@@ -11,7 +11,7 @@ form.addEventListener('submit',async function (e)
     }
     try
     {
-        const res = await axios.post("http://43.205.102.27:3000/password/forgotpassword", credential);
+        const res = await axios.post("http://3.110.158.191:3000/password/forgotpassword", credential);
         document.getElementById('email-message').innerText = res.data.message;
         document.getElementById('email').value = '';
         console.log(res);

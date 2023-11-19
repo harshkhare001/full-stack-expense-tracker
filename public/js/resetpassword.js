@@ -18,7 +18,7 @@ form.addEventListener('submit', async (e)=>{
             password
         };
         try{
-            const res = await axios.post('http://43.205.102.27:3000/password/resetpassword',data);
+            const res = await axios.post('http://3.110.158.191:3000/password/resetpassword',data);
             console.log(res);
             window.alert(res.data.message);
         }

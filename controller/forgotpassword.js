@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const client = Sib.ApiClient.instance;
 const apiKey = client.authentications['api-key'];
-apiKey.apiKey = process.env.EMAIL_SECRET_KEY;
+apiKey.apiKey ="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";
 
 exports.getHomePage = (req, res, next)=>
 {
@@ -52,7 +52,7 @@ exports.sendEmail = async (req, res, next)=>
     to : receivers,
     subject : 'forgot Password',
     textContent : `Hi ${user.name},
-    Please reset your Password using this password reset link http://localhost:3000/resetpassword/${uu_id}
+    Please reset your Password using this password reset link http://3.110.158.191:3000/resetpassword/${uu_id}
     Thank You`
    })
    .then((result)=>{

@@ -4,6 +4,7 @@ const Users = require('../models/user');
 const FPR = require('../models/forgotpasswordrequest');
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
 const client = Sib.ApiClient.instance;
 const apiKey = client.authentications['api-key'];

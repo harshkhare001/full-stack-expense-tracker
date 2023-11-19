@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const client = Sib.ApiClient.instance;
 const apiKey = client.authentications['api-key'];
-apiKey.apiKey ="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";
+apiKey.apiKey =process.env.EMAIL_SECRET_KEY;
 
 exports.getHomePage = (req, res, next)=>
 {
@@ -38,7 +38,7 @@ exports.sendEmail = async (req, res, next)=>
    
    const sender = 
    {
-    email : 'harshd.18.beis@acharya.ac.in',
+    email : 'harshkhare2020@gmail.com',
     name : 'My-Expense'
    }
    const receivers = 

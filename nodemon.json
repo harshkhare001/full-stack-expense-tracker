@@ -2,7 +2,7 @@
     "env":{
         "RAZORPAY_KEY_ID" : "rzp_test_3EMdUaEXecM3FV",
         "RAZORPAY_KEY_SECRET" : "vv4cPp48iIbn8sd0CXX9SbFS",
-        "EMAIL_SECRET_KEY" : "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",
+        "EMAIL_SECRET_KEY" : "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",
         "ACCESS_KEY" : "AKIAY4EGVRCY5OWTBF7P",
         "SECRET_ACCESS_KEY" : "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",
         "BUCKET_NAME" : "expensetracker2209",

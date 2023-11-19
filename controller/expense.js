@@ -2,6 +2,7 @@ const path = require('path');
 const Expense = require('../models/expense');
 const User = require('../models/user');
 const sequelize = require('../util/database');
+require('dotenv').config();
 
 exports.getHomePage = (req,res,next)=>
 {

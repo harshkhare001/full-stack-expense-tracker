@@ -6,6 +6,7 @@ require('dotenv').config();
 
 function generateAccessToken(id, email,ispremiumuser)
 {
+    console.log(process.env.SECRET_KEY);
     return jwt.sign({ userId: id, email: email, ispremiumuser }, process.env.SECRET_KEY);
 }
 

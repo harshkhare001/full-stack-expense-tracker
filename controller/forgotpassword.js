@@ -52,7 +52,7 @@ exports.sendEmail = async (req, res, next)=>
     to : receivers,
     subject : 'forgot Password',
     textContent : `Hi ${user.name},
-    Please reset your Password using this password reset link http://3.110.158.191:3000/resetpassword/${uu_id}
+    Please reset your Password using this password reset link http://65.1.136.178:3000/resetpassword/${uu_id}
     Thank You`
    })
    .then((result)=>{

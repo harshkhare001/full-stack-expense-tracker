@@ -10,6 +10,6 @@
         "DATABASE_PASSWORD" : "harsh123",
         "DATABASE_USER" : "harsh",
         "DATABASE_NAME" : "expense-tracker",
-        "DATABASE_HOST" : "database-2.ceo8uaj0yirw.ap-south-1.rds.amazonaws.com"
+        "DATABASE_HOST" : "database-1.ceo8uaj0yirw.ap-south-1.rds.amazonaws.com"
     }
 }

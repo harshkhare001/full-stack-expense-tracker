@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const client = Sib.ApiClient.instance;
 const apiKey = client.authentications['api-key'];
-apiKey.apiKey ='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';
+apiKey.apiKey = process.env.EMAIL_SECRET_KEY;
 
 exports.getHomePage = (req, res, next)=>
 {
